@@ -1,0 +1,78 @@
+type User @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  email: String!
+  name: String!
+  trainingPrograms: [TrainingProgram] @hasMany
+  workoutHistory: [WorkoutHistory] @hasMany  # Logs past workouts for ML tracking
+  mlRecommendations: [MLRecommendation] @hasMany  # AI-generated workout suggestions
+}
+
+type TrainingProgram @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  user: User @belongsTo
+  workouts: [Workout] @hasMany
+  phase: String!  # "Hypertrophy", "Strength", "Deload"
+  startDate: AWSDateTime
+  endDate: AWSDateTime
+}
+
+type Workout @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  trainingProgram: TrainingProgram @belongsTo
+  exercises: [WorkoutExercise] @hasMany
+  date: AWSDateTime
+  history: [WorkoutHistory] @hasMany  # 🔥 Fix for WorkoutHistory
+  mlRecommendations: [MLRecommendation] @hasMany  # 🔥 Fix for MLRecommendation
+}
+
+type WorkoutExercise @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  workout: Workout @belongsTo
+  exercise: Exercise @hasOne
+  sets: [ExerciseSet] @hasMany
+}
+
+type Exercise @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  category: String! # "Push", "Pull", "Legs"
+  difficulty: Int
+  primaryMuscles: [String!]
+  secondaryMuscles: [String!]
+}
+
+type ExerciseSet @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  workoutExercise: WorkoutExercise @belongsTo
+  setNumber: Int!
+  weight: Float
+  reps: Int!
+  rpe: Float
+  rir: Int
+  restTime: Int
+  completed: Boolean
+}
+
+# 🟢 Tracks past workouts for ML training
+type WorkoutHistory @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  user: User @belongsTo
+  workout: Workout @belongsTo
+  date: AWSDateTime
+  totalVolume: Float  # Sum of (weight * reps) across exercises
+  fatigueScore: Float # ML Metric: User feedback on intensity
+  performanceScore: Float  # ML Metric: Workout effectiveness
+}
+
+# 🟢 AI-generated workout suggestions
+type MLRecommendation @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  user: User @belongsTo
+  recommendedWorkout: Workout @belongsTo
+  dateGenerated: AWSDateTime
+  confidenceScore: Float  # ML Model Confidence Level
+  notes: String
+}
+

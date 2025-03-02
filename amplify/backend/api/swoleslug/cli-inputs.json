@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "swoleslug",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authswoleslug6a3c2a4d"
+    },
+    "additionalAuthTypes": [],
+    "conflictResolution": {}
+  }
+}

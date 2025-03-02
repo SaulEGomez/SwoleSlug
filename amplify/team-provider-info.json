@@ -1,0 +1,23 @@
+{
+  "swoleslug": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-swoleslug-swoleslug-03a24-authRole",
+      "UnauthRoleArn": "arn:aws:iam::911167913511:role/amplify-swoleslug-swoleslug-03a24-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::911167913511:role/amplify-swoleslug-swoleslug-03a24-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-swoleslug-swoleslug-03a24-deployment",
+      "UnauthRoleName": "amplify-swoleslug-swoleslug-03a24-unauthRole",
+      "StackName": "amplify-swoleslug-swoleslug-03a24",
+      "StackId": "arn:aws:cloudformation:us-west-1:911167913511:stack/amplify-swoleslug-swoleslug-03a24/cd4f70e0-f4dd-11ef-b475-02c5cd532cf7",
+      "AmplifyAppId": "d2sh306lt44vg8"
+    },
+    "categories": {
+      "auth": {
+        "swoleslug6a3c2a4d": {}
+      },
+      "api": {
+        "swoleslug": {}
+      }
+    }
+  }
+}

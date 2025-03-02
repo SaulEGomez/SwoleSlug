@@ -1,0 +1,6 @@
+{
+  "AppSyncApiName": "swoleslug",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "AuthCognitoUserPoolId": "us-west-1_dJs5jwIMZ",
+  "DynamoDBEnableServerSideEncryption": false
+}
